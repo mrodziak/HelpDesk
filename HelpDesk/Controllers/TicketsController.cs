@@ -198,5 +198,20 @@ namespace HelpDesk.Controllers
         {
             return _context.Tickets.Any(e => e.Id == id);
         }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin,Support")]
+        public async Task<IActionResult> ChangeStatus(int id, string status)
+        {
+            var ticket = await _context.Tickets.FindAsync(id);
+            if (ticket == null)
+                return NotFound();
+
+            ticket.Status = status;
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

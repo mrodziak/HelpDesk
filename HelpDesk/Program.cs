@@ -61,7 +61,7 @@ using (var scope = app.Services.CreateScope())
 {
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
-    var adminEmail = "admin1@helpdesk.pl"; 
+    var adminEmail = "admin1@helpdesk.pl";
     var adminUser = await userManager.FindByEmailAsync(adminEmail);
 
     if (adminUser != null && !await userManager.IsInRoleAsync(adminUser, HelpDesk.Constants.Roles.Admin))

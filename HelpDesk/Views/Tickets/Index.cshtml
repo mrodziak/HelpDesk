@@ -54,9 +54,24 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Priority.Name)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
+                <td>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Support"))
+                    {
+                        <form asp-action="ChangeStatus" method="post">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <select name="status" onchange="this.form.submit()">
+                                <option value="Nowe" selected="@(item.Status == "Nowe")">Nowe</option>
+                                <option value="W toku" selected="@(item.Status == "W toku")">W toku</option>
+                                <option value="Zamknięte" selected="@(item.Status == "Zamknięte")">Zamknięte</option>
+                            </select>
+                        </form>
+                    }
+                    else
+                    {
+                        @item.Status
+                    }
+                </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.User.Id)
             </td>
