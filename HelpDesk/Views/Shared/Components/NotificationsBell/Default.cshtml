@@ -1,0 +1,16 @@
+﻿@model int
+
+<li class="nav-item">
+    <a class="nav-link position-relative"
+       asp-controller="Notifications"
+       asp-action="Index">
+        🔔
+        @if (Model > 0)
+        {
+            <span class="badge bg-danger position-absolute"
+                  style="top: 0; right: 0;">
+                @Model
+            </span>
+        }
+    </a>
+</li>

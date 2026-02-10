@@ -1,0 +1,52 @@
+﻿@model IEnumerable<HelpDesk.Models.Notification>
+
+@{
+    ViewData["Title"] = "Powiadomienia";
+}
+
+<h1>Powiadomienia</h1>
+
+<form asp-action="MarkAllRead" method="post" class="mb-3">
+    @Html.AntiForgeryToken()
+    <button class="btn btn-sm btn-outline-primary" type="submit">Oznacz wszystkie jako przeczytane</button>
+</form>
+
+@if (!Model.Any())
+{
+    <p class="text-muted">Brak powiadomień.</p>
+}
+else
+{
+    <div class="list-group">
+        @foreach (var n in Model)
+        {
+            <div class="list-group-item">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <strong>@n.Title</strong>
+                        @if (!n.IsRead)
+                        {
+                            <span class="badge bg-primary ms-2">NOWE</span>
+                        }
+                        <div class="text-muted" style="font-size: 0.9em;">@n.CreatedAt</div>
+                    </div>
+
+                    <form asp-action="MarkAsRead" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@n.Id" />
+                        <button type="submit" class="btn btn-sm btn-outline-secondary">Przeczytane</button>
+                    </form>
+                </div>
+
+                <div class="mt-2">@n.Message</div>
+
+                @if (!string.IsNullOrWhiteSpace(n.Url))
+                {
+                    <div class="mt-2">
+                        <a href="@n.Url">Otwórz</a>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+}

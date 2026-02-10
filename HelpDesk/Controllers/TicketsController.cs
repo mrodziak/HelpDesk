@@ -62,15 +62,18 @@ namespace HelpDesk.Controllers
                 .Include(t => t.Category)
                 .Include(t => t.Priority)
                 .Include(t => t.User)
+                .Include(t => t.Comments)
+                    .ThenInclude(c => c.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (ticket == null) return NotFound();
 
-            // Zwykły user nie może oglądać cudzych zgłoszeń
-            if (!IsAdminOrSupport())
+            // Dostęp: Admin/Support wszystko, user tylko swoje
+            if (!User.IsInRole(Roles.Admin) && !User.IsInRole(Roles.Support))
             {
-                var userId = _userManager.GetUserId(User);
-                if (ticket.UserId != userId) return Forbid();
+                var currentUserId = _userManager.GetUserId(User);
+                if (ticket.UserId != currentUserId)
+                    return Forbid();
             }
 
             return View(ticket);

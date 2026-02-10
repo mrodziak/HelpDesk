@@ -35,6 +35,7 @@
                             <a class="nav-link text-dark" asp-controller="Tickets" asp-action="Index">Zgłoszenia</a>
                         </li>
                     </ul>
+                    @await Component.InvokeAsync("NotificationsBell")
                     <partial name="_LoginPartial" />
                 </div>
             </div>
