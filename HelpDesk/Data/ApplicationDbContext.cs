@@ -12,6 +12,7 @@ namespace HelpDesk.Data
         }
         public DbSet<Category> Categories { get; set; } = default!;
         public DbSet<Priority> Priorities { get; set; } = default!;
+        public DbSet<Ticket> Tickets { get; set; } = default!;
 
     }
 }
