@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using HelpDesk.Models;
 
 namespace HelpDesk.Data
 {
@@ -9,5 +10,8 @@ namespace HelpDesk.Data
             : base(options)
         {
         }
+        public DbSet<Category> Categories { get; set; } = default!;
+        public DbSet<Priority> Priorities { get; set; } = default!;
+
     }
 }
