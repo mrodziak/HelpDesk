@@ -28,7 +28,6 @@ namespace HelpDesk.Models
         [Required]
         public string Status { get; set; } = "Nowe";
 
-        [Required]
         public string UserId { get; set; } = string.Empty;
 
         [ForeignKey(nameof(UserId))]
