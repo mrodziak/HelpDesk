@@ -1,8 +1,53 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Start";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="card">
+    <div class="card-body p-4 p-lg-5">
+        <h1 class="page-title mb-2">System zgłoszeń HelpDesk</h1>
+        <p class="page-lead mb-4">
+            Zgłaszaj problemy, śledź status, komentuj i odbieraj powiadomienia o zmianach.
+        </p>
+
+        <div class="d-flex flex-wrap gap-2">
+            <a class="btn btn-primary" asp-controller="Tickets" asp-action="Index">Przejdź do zgłoszeń</a>
+            <a class="btn btn-outline-primary" asp-controller="Tickets" asp-action="Create">Utwórz zgłoszenie</a>
+            <a class="btn btn-outline-primary" asp-controller="Notifications" asp-action="Index">Powiadomienia</a>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mt-3">
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="fw-bold mb-2">Role i dostęp</h5>
+                <p class="text-muted mb-0">
+                    Użytkownik widzi swoje zgłoszenia. Support i Admin obsługują zgłoszenia, zmieniają statusy, priorytety i komentują.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="fw-bold mb-2">Komentarze</h5>
+                <p class="text-muted mb-0">
+                    Wątek rozmowy w każdym zgłoszeniu — komunikacja user ↔ support ↔ admin w jednym miejscu.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="fw-bold mb-2">Powiadomienia</h5>
+                <p class="text-muted mb-0">
+                    Dzwoneczek informuje o komentarzach, zmianach statusu, priorytetu oraz przypisaniu zgłoszenia.
+                </p>
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,22 +1,236 @@
-html {
-  font-size: 14px;
+/* === Base === */
+:root {
+    --bg: #f6f8fa;
+    --text: #0f172a;
+    --muted: #64748b;
+    --border: #e5e7eb;
+    --brand: #0f766e; /* teal */
+    --brand-600: #0d6b64;
+    --brand-700: #0b5f59;
+    --brand-soft: rgba(15, 118, 110, 0.12);
+    --link: #0f766e;
+    --link-hover: #0b5f59;
+    --card: #ffffff;
+    --shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+    --radius: 16px;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+html, body {
+    height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* Bootstrap override: keep things centered and not "stuck left" */
+.container.app-container {
+    max-width: 1220px; /* stable width */
+    margin: 0 auto;
+    padding-left: 18px;
+    padding-right: 18px;
+}
+
+/* Links */
+a {
+    color: var(--link);
+    text-decoration: none;
+}
+
+    a:hover {
+        color: var(--link-hover);
+        text-decoration: underline;
+    }
+
+/* === Navbar === */
+.app-navbar {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+}
+
+.app-brand {
+    font-weight: 800;
+    letter-spacing: 0.2px;
+    color: var(--text);
+    font-size: 1.35rem;
+}
+
+    .app-brand span {
+        color: var(--brand);
+    }
+
+.nav-link {
+    color: var(--muted);
+    font-weight: 600;
+}
+
+    .nav-link:hover,
+    .nav-link:focus {
+        color: var(--text);
+    }
+
+.btn-primary {
+    background: var(--brand);
+    border-color: var(--brand);
+}
+
+    .btn-primary:hover {
+        background: var(--brand-700);
+        border-color: var(--brand-700);
+    }
+
+.btn-outline-primary {
+    color: var(--brand);
+    border-color: var(--brand);
+}
+
+    .btn-outline-primary:hover {
+        background: var(--brand);
+        border-color: var(--brand);
+    }
+
+/* === Page headers === */
+.page-title {
+    font-weight: 900;
+    letter-spacing: -0.4px;
+}
+
+.page-lead {
+    color: var(--muted);
+}
+
+/* === Cards === */
+.card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+/* === Table styling === */
+.card-table {
+    overflow: hidden; /* rounded corners + table */
+}
+
+.table-wrap {
+    width: 100%;
+    overflow-x: auto; /* prevents layout breaking on smaller screens */
+}
+
+.table {
+    margin-bottom: 0;
+    background: var(--card);
+}
+
+    .table thead th {
+        font-size: 0.92rem;
+        color: #1f2937;
+        font-weight: 800;
+        border-bottom: 1px solid var(--border);
+        padding-top: 16px;
+        padding-bottom: 16px;
+        background: #fbfcfd;
+        vertical-align: middle;
+    }
+
+    .table tbody td {
+        border-top: 1px solid var(--border);
+        vertical-align: top;
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+
+    .table tbody tr:nth-child(odd) {
+        background: rgba(15, 118, 110, 0.03);
+    }
+
+/* Better readability: title + description */
+.ticket-title {
+    font-weight: 900;
+    color: #0b3b36;
+    line-height: 1.25;
+}
+
+.ticket-sub {
+    color: var(--muted);
+    max-width: 420px; /* prevents super tall rows */
+    display: -webkit-box;
+    -webkit-line-clamp: 6; /* clamp long descriptions */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Compact selects inside table */
+.table .form-select-sm {
+    min-width: 132px;
+    border-radius: 12px;
+}
+
+.table .btn-sm {
+    border-radius: 12px;
+}
+
+/* Actions column */
+.actions {
+    white-space: nowrap;
+}
+
+    .actions a {
+        font-weight: 700;
+    }
+
+/* Filter buttons group */
+.btn-group .btn {
+    border-radius: 12px !important;
+    font-weight: 700;
+}
+
+    .btn-group .btn.active {
+        background: var(--brand);
+        border-color: var(--brand);
+        color: #fff;
+    }
+
+/* Badge NEW (notifications etc.) */
+.badge-new {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: 900;
+    font-size: 0.75rem;
+    background: var(--brand);
+    color: #fff;
+}
+
+/* Notifications bell badge (if you use it) */
+.notif-badge {
+    background: #ef4444;
+    color: #fff;
+    font-weight: 900;
+    border-radius: 999px;
+    padding: 2px 7px;
+    font-size: 0.72rem;
+    position: relative;
+    top: -8px;
+    left: -8px;
+}
+
+/* Footer */
+.footer {
+    background: transparent;
+    border-top: 1px solid var(--border);
+}
+
+/* Small screens: reduce clamp and spacing */
+@media (max-width: 768px) {
+    .ticket-sub {
+        max-width: 260px;
+        -webkit-line-clamp: 4;
+    }
+
+    .page-title {
+        font-size: 2rem;
+    }
 }

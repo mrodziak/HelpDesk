@@ -32,6 +32,11 @@ namespace HelpDesk.Models
 
         [ForeignKey(nameof(UserId))]
         public IdentityUser? User { get; set; }
+        public string? AssignedToUserId { get; set; }
+
+        [ForeignKey(nameof(AssignedToUserId))]
+        public IdentityUser? AssignedTo { get; set; }
+
         public ICollection<TicketComment> Comments { get; set; } = new List<TicketComment>();
 
     }
