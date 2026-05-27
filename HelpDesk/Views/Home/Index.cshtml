@@ -1,18 +1,18 @@
 ﻿@{
-    ViewData["Title"] = "Start";
+    ViewData["Title"] = "Home";
 }
 
 <div class="card">
     <div class="card-body p-4 p-lg-5">
-        <h1 class="page-title mb-2">System zgłoszeń HelpDesk</h1>
+        <h1 class="page-title mb-2">HelpDesk Ticketing System</h1>
         <p class="page-lead mb-4">
-            Zgłaszaj problemy, śledź status, komentuj i odbieraj powiadomienia o zmianach.
+            Report issues, track status, comment, and receive notifications about changes.
         </p>
 
         <div class="d-flex flex-wrap gap-2">
-            <a class="btn btn-primary" asp-controller="Tickets" asp-action="Index">Przejdź do zgłoszeń</a>
-            <a class="btn btn-outline-primary" asp-controller="Tickets" asp-action="Create">Utwórz zgłoszenie</a>
-            <a class="btn btn-outline-primary" asp-controller="Notifications" asp-action="Index">Powiadomienia</a>
+            <a class="btn btn-primary" asp-controller="Tickets" asp-action="Index">Go to tickets</a>
+            <a class="btn btn-outline-primary" asp-controller="Tickets" asp-action="Create">Create a ticket</a>
+            <a class="btn btn-outline-primary" asp-controller="Notifications" asp-action="Index">Notifications</a>
         </div>
     </div>
 </div>
@@ -21,9 +21,9 @@
     <div class="col-md-4">
         <div class="card h-100">
             <div class="card-body">
-                <h5 class="fw-bold mb-2">Role i dostęp</h5>
+                <h5 class="fw-bold mb-2">Roles and access</h5>
                 <p class="text-muted mb-0">
-                    Użytkownik widzi swoje zgłoszenia. Support i Admin obsługują zgłoszenia, zmieniają statusy, priorytety i komentują.
+                    Users can see their own tickets. Support and Admin handle tickets, change statuses, priorities, and add comments.
                 </p>
             </div>
         </div>
@@ -32,9 +32,9 @@
     <div class="col-md-4">
         <div class="card h-100">
             <div class="card-body">
-                <h5 class="fw-bold mb-2">Komentarze</h5>
+                <h5 class="fw-bold mb-2">Comments</h5>
                 <p class="text-muted mb-0">
-                    Wątek rozmowy w każdym zgłoszeniu — komunikacja user ↔ support ↔ admin w jednym miejscu.
+                    Conversation threads in every ticket — user ↔ support ↔ admin communication in one place.
                 </p>
             </div>
         </div>
@@ -43,9 +43,9 @@
     <div class="col-md-4">
         <div class="card h-100">
             <div class="card-body">
-                <h5 class="fw-bold mb-2">Powiadomienia</h5>
+                <h5 class="fw-bold mb-2">Notifications</h5>
                 <p class="text-muted mb-0">
-                    Dzwoneczek informuje o komentarzach, zmianach statusu, priorytetu oraz przypisaniu zgłoszenia.
+                    The bell icon notifies you about comments, changes in status and priority, and ticket assignments.
                 </p>
             </div>
         </div>

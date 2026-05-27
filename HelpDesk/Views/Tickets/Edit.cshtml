@@ -1,10 +1,10 @@
 ﻿@model HelpDesk.Models.Ticket
 
 @{
-    ViewData["Title"] = "Edycja zgłoszenia";
+    ViewData["Title"] = "Edit ticket";
 }
 
-<h1>Edycja zgłoszenia</h1>
+<h1>Edit ticket</h1>
 
 <hr />
 <div class="row">
@@ -14,26 +14,26 @@
             <input type="hidden" asp-for="Id" />
 
             <div class="form-group mb-3">
-                <label asp-for="Title" class="control-label">Tytuł</label>
+                <label asp-for="Title" class="control-label">Title</label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-3">
-                <label asp-for="Description" class="control-label">Opis</label>
+                <label asp-for="Description" class="control-label">Description</label>
                 <textarea asp-for="Description" class="form-control" rows="4"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-3">
-                <label asp-for="CategoryId" class="control-label">Kategoria</label>
+                <label asp-for="CategoryId" class="control-label">Category</label>
                 <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Zapisz" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-link">Powrót do listy</a>
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-link">Back to list</a>
             </div>
         </form>
     </div>

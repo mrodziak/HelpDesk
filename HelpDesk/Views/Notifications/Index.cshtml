@@ -1,16 +1,16 @@
 ﻿@model IEnumerable<HelpDesk.Models.Notification>
 @{
-    ViewData["Title"] = "Powiadomienia";
+    ViewData["Title"] = "Notifications";
 }
 
 <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
     <div>
-        <h1 class="page-title mb-1">Powiadomienia</h1>
-        <div class="page-lead">Lista informacji o zmianach w Twoich zgłoszeniach.</div>
+        <h1 class="page-title mb-1">Notifications</h1>
+        <div class="page-lead">List of updates regarding your tickets.</div>
     </div>
 
     <form asp-action="MarkAllRead" method="post">
-        <button class="btn btn-outline-primary">Oznacz wszystkie jako przeczytane</button>
+        <button class="btn btn-outline-primary">Mark all as read</button>
     </form>
 </div>
 
@@ -18,7 +18,7 @@
     <div class="card-body p-4">
         @if (!Model.Any())
         {
-            <p class="text-muted mb-0">Brak powiadomień.</p>
+            <p class="text-muted mb-0">No notifications.</p>
         }
         else
         {
@@ -31,7 +31,7 @@
                                 <div class="fw-bold">@n.Title</div>
                                 @if (!n.IsRead)
                                 {
-                                    <span class="badge-new">NOWE</span>
+                                    <span class="badge-new">NEW</span>
                                 }
                             </div>
                             <div class="text-muted small">@n.CreatedAt.ToString("dd.MM.yyyy HH:mm:ss")</div>
@@ -39,7 +39,7 @@
 
                         <form asp-action="MarkRead" method="post">
                             <input type="hidden" name="id" value="@n.Id" />
-                            <button class="btn btn-outline-primary btn-sm">Przeczytane</button>
+                            <button class="btn btn-outline-primary btn-sm">Mark as read</button>
                         </form>
                     </div>
 
@@ -48,7 +48,7 @@
                     @if (!string.IsNullOrWhiteSpace(n.Url))
                     {
                         <div class="mt-2">
-                            <a href="@n.Url">Otwórz</a>
+                            <a href="@n.Url">Open</a>
                         </div>
                     }
                 </div>

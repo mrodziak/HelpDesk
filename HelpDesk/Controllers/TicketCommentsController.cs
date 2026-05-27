@@ -99,13 +99,13 @@ namespace HelpDesk.Controllers
 
             // 🔔 Powiadomienia: Admin + Owner + Assigned Support (bez autora)
             var author = await _userManager.FindByIdAsync(currentUserId!);
-            var authorLogin = author?.Email?.Split('@')[0] ?? "użytkownik";
+            var authorLogin = author?.Email?.Split('@')[0] ?? "user";
             var url = $"/Tickets/Details/{ticketId}";
 
             await NotifyAdminsOwnerAndAssignedAsync(
                 ticket,
-                title: "Nowy komentarz",
-                message: $"{authorLogin} dodał(a) komentarz do zgłoszenia: \"{ticket.Title}\"",
+                title: "New comment",
+                message: $"{authorLogin} added new comment to your ticket: \"{ticket.Title}\"",
                 url: url,
                 actorUserId: currentUserId
             );

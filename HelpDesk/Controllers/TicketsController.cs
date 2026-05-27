@@ -132,21 +132,21 @@ namespace HelpDesk.Controllers
         {
             ticket.UserId = CurrentUserId();
             ticket.CreatedAt = DateTime.Now;
-            ticket.Status = "Nowe";
+            ticket.Status = "New";
 
             // domyślny priorytet: Średni
             var defaultPriority = await _context.Priorities.FirstOrDefaultAsync(p =>
-                p.Name == "Średni" ||
-                p.Name == "Sredni" ||
-                p.Name.ToLower() == "średni" ||
-                p.Name.ToLower() == "sredni");
+                p.Name == "Medium" ||
+                p.Name == "Medium" ||
+                p.Name.ToLower() == "medium" ||
+                p.Name.ToLower() == "medium");
 
             if (defaultPriority == null)
                 defaultPriority = await _context.Priorities.OrderBy(p => p.Id).FirstOrDefaultAsync();
 
             if (defaultPriority == null)
             {
-                ModelState.AddModelError("", "Brak priorytetów w systemie. Dodaj priorytety jako Admin.");
+                ModelState.AddModelError("", "No priorities available. Add new ones as Admin.");
             }
             else
             {

@@ -3,7 +3,7 @@
 @using Microsoft.AspNetCore.Mvc.Rendering
 
 @{
-    ViewData["Title"] = "Zgłoszenia";
+    ViewData["Title"] = "Tickets";
 
     bool isAdmin = User.IsInRole(Roles.Admin);
     bool isSupport = User.IsInRole(Roles.Support);
@@ -19,22 +19,22 @@
 
 <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
     <div>
-        <h1 class="page-title mb-1">Zgłoszenia</h1>
-        <div class="page-lead">Lista zgłoszeń i szybkie akcje.</div>
+        <h1 class="page-title mb-1">Tickets</h1>
+        <div class="page-lead">List of tickets and quick actions.</div>
     </div>
 
-    <a class="btn btn-primary" asp-action="Create">Utwórz nowe</a>
+    <a class="btn btn-primary" asp-action="Create">Create new</a>
 </div>
 
 @if (isAdminOrSupport)
 {
-    <div class="btn-group mb-3" role="group" aria-label="Filtry">
+    <div class="btn-group mb-3" role="group" aria-label="Filters">
         <a class="btn btn-outline-primary @(filter == "all" ? "active" : "")"
-           asp-action="Index" asp-route-filter="all">Wszystkie</a>
+           asp-action="Index" asp-route-filter="all">All</a>
         <a class="btn btn-outline-primary @(filter == "mine" ? "active" : "")"
-           asp-action="Index" asp-route-filter="mine">Moje przypisane</a>
+           asp-action="Index" asp-route-filter="mine">Assigned to me</a>
         <a class="btn btn-outline-primary @(filter == "unassigned" ? "active" : "")"
-           asp-action="Index" asp-route-filter="unassigned">Nieprzypisane</a>
+           asp-action="Index" asp-route-filter="unassigned">Unassigned</a>
     </div>
 }
 
@@ -43,14 +43,14 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th style="min-width: 240px;">Tytuł</th>
-                    <th style="min-width: 320px;">Opis</th>
-                    <th style="min-width: 160px;">Utworzono</th>
-                    <th style="min-width: 140px;">Kategoria</th>
-                    <th style="min-width: 160px;">Priorytet</th>
+                    <th style="min-width: 240px;">Title</th>
+                    <th style="min-width: 320px;">Description</th>
+                    <th style="min-width: 160px;">Created at</th>
+                    <th style="min-width: 140px;">Category</th>
+                    <th style="min-width: 160px;">Priority</th>
                     <th style="min-width: 160px;">Status</th>
-                    <th style="min-width: 220px;">Przypisany do</th>
-                    <th style="min-width: 160px;">Użytkownik</th>
+                    <th style="min-width: 220px;">Assigned to</th>
+                    <th style="min-width: 160px;">User</th>
                     <th style="min-width: 190px;"></th>
                 </tr>
             </thead>
@@ -59,7 +59,7 @@
                 @foreach (var item in Model)
                 {
                     var userLogin = item.User?.Email?.Split('@')[0] ?? "";
-                    var assignedLogin = item.AssignedTo?.Email?.Split('@')[0] ?? "Nieprzypisane";
+                    var assignedLogin = item.AssignedTo?.Email?.Split('@')[0] ?? "Unassigned";
 
                     bool isAssignedToMe = (item.AssignedToUserId != null && item.AssignedToUserId == CurrentUserId());
                     bool canEdit = isAdmin || (isSupport && isAssignedToMe);
@@ -75,7 +75,6 @@
 
                         <td>@item.Category?.Name</td>
 
-                        <!-- Priorytet -->
                         <td>
                             @if (canEdit)
                             {
@@ -96,7 +95,6 @@
                             }
                         </td>
 
-                        <!-- Status -->
                         <td>
                             @if (canEdit)
                             {
@@ -104,19 +102,36 @@
                                     @Html.AntiForgeryToken()
                                     <input type="hidden" name="id" value="@item.Id" />
                                     <select name="status" class="form-select form-select-sm" onchange="this.form.submit()">
-                                        <option value="Nowe" selected="@(item.Status == "Nowe")">Nowe</option>
-                                        <option value="W toku" selected="@(item.Status == "W toku")">W toku</option>
-                                        <option value="Zamknięte" selected="@(item.Status == "Zamknięte")">Zamknięte</option>
+                                        <option value="Nowe" selected="@(item.Status == "Nowe")">New</option>
+                                        <option value="W toku" selected="@(item.Status == "W toku")">In progress</option>
+                                        <option value="Zamknięte" selected="@(item.Status == "Zamknięte")">Closed</option>
                                     </select>
                                 </form>
                             }
                             else
                             {
-                                @item.Status
+                                switch (item.Status)
+                                {
+                                    case "Nowe":
+
+                                        <span>New</span>
+                                        ; break;
+                                    case "W toku":
+
+                                        <span>In progress</span>
+                                        ; break;
+                                    case "Zamknięte":
+
+                                        <span>Closed</span>
+                                        ; break;
+                                    default:
+
+                                        @item.Status
+                                        ; break;
+                                }
                             }
                         </td>
 
-                        <!-- Przypisany do -->
                         <td>
                             @if (isAdmin)
                             {
@@ -125,14 +140,14 @@
                                     <input type="hidden" name="id" value="@item.Id" />
 
                                     <select name="supportUserId" class="form-select form-select-sm">
-                                        <option value="">-- wybierz support --</option>
+                                        <option value="">-- select support --</option>
                                         @foreach (var s in supportUsers)
                                         {
                                             <option value="@s.Value" selected="@(item.AssignedToUserId == s.Value)">@s.Text</option>
                                         }
                                     </select>
 
-                                    <button class="btn btn-outline-primary btn-sm" type="submit">Przypisz</button>
+                                    <button class="btn btn-outline-primary btn-sm" type="submit">Assign</button>
                                 </form>
                             }
                             else if (isSupport)
@@ -142,7 +157,7 @@
                                     <form asp-action="Take" method="post" class="d-inline">
                                         @Html.AntiForgeryToken()
                                         <input type="hidden" name="id" value="@item.Id" />
-                                        <button class="btn btn-outline-primary btn-sm" type="submit">Weź</button>
+                                        <button class="btn btn-outline-primary btn-sm" type="submit">Claim</button>
                                     </form>
                                 }
                                 else
@@ -159,11 +174,11 @@
                         <td>@userLogin</td>
 
                         <td class="actions">
-                            <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a>
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                             <span class="text-muted"> | </span>
-                            <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                             <span class="text-muted"> | </span>
-                            <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                         </td>
                     </tr>
                 }

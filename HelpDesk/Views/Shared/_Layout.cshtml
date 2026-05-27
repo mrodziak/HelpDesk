@@ -3,7 +3,7 @@
 @inject UserManager<IdentityUser> UserManager
 
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,27 +20,27 @@
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
-                        aria-controls="mainNav" aria-expanded="false" aria-label="Przełącz nawigację">
+                        aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="mainNav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Start</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Tickets" asp-action="Index">Zgłoszenia</a>
+                            <a class="nav-link" asp-area="" asp-controller="Tickets" asp-action="Index">Tickets</a>
                         </li>
 
-                        @* Admin-only: słowniki *@
+                        @* Admin-only: dictionaries *@
                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Categories" asp-action="Index">Kategorie</a>
+                                <a class="nav-link" asp-area="" asp-controller="Categories" asp-action="Index">Categories</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Priorities" asp-action="Index">Priorytety</a>
+                                <a class="nav-link" asp-area="" asp-controller="Priorities" asp-action="Index">Priorities</a>
                             </li>
                         }
                     </ul>
@@ -67,7 +67,7 @@
 
                             <li class="nav-item">
                                 <form class="d-inline" asp-area="Identity" asp-page="/Account/Logout" method="post">
-                                    <button type="submit" class="btn btn-outline-primary btn-sm">Wyloguj</button>
+                                    <button type="submit" class="btn btn-outline-primary btn-sm">Logout</button>
                                 </form>
                             </li>
                         }
@@ -77,10 +77,10 @@
                                 <span class="text-muted">•</span>
                             </li>
                             <li class="nav-item">
-                                <a class="btn btn-outline-primary btn-sm" asp-area="Identity" asp-page="/Account/Register">Rejestracja</a>
+                                <a class="btn btn-outline-primary btn-sm" asp-area="Identity" asp-page="/Account/Register">Register</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn btn-primary btn-sm" asp-area="Identity" asp-page="/Account/Login">Logowanie</a>
+                                <a class="btn btn-primary btn-sm" asp-area="Identity" asp-page="/Account/Login">Login</a>
                             </li>
                         }
                     </ul>
