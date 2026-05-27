@@ -1,115 +1,207 @@
-# HelpDesk – System zgłoszeń IT
+# HelpDesk – Ticket Management System
 
-Projekt zaliczeniowy (poprawkowy) z przedmiotu Programowanie zaawansowane.
+## Project Description
 
-Aplikacja webowa w architekturze klient–serwer wykonana w technologii:
+HelpDesk is a web-based ticket management system created as a semester project for the Software Engineering course.
 
+The application simulates a real internal company helpdesk environment where employees can report technical issues and communicate with IT support staff. The system supports ticket management, role-based authorization, notifications, comments, and ticket assignment workflows.
+
+The project was developed using ASP.NET Core MVC (.NET 8) and Entity Framework Core with a SQL Server database.
+
+---
+
+# Main Features
+
+## User Features
+
+- User registration and login
+- Creating support tickets
+- Viewing own tickets
+- Editing and deleting own tickets
+- Adding comments to tickets
+- Receiving notifications about updates
+
+---
+
+## Support Features
+
+- Viewing all tickets
+- Taking unassigned tickets
+- Managing assigned tickets
+- Changing ticket status
+- Changing ticket priority
+- Adding comments
+- Receiving notifications
+
+---
+
+## Administrator Features
+
+- Full access to the system
+- Managing ticket categories
+- Managing priorities
+- Assigning tickets to support employees
+- Managing all tickets
+- Viewing all comments and notifications
+
+---
+
+# Technologies Used
+
+## Backend
+- C#
 - ASP.NET Core MVC (.NET 8)
 - Entity Framework Core
-- SQL Server (LocalDB)
-- ASP.NET Identity (system użytkowników i ról)
+- ASP.NET Identity
 
-## Opis projektu
+## Frontend
+- Razor Views
+- HTML5
+- CSS3
+- Bootstrap 5
 
-HelpDesk to system do obsługi zgłoszeń IT w firmie.
-Użytkownicy mogą tworzyć zgłoszenia problemów technicznych, które następnie są obsługiwane przez dział Support oraz Administratorów.
-Projekt implementuje pełną logikę biznesową, system ról oraz relacje między modelami danych.
+## Database
+- SQL Server
 
-## Architektura
+## Development Tools
+- Visual Studio 2022
+- GitHub
+- Entity Framework Core Migrations
 
-Projekt został wykonany w architekturze MVC:
+---
 
-- **Models** – modele danych (Ticket, Category, Priority, TicketComment, Notification)
-- **Views** – warstwa prezentacji (Razor)
-- **Controllers** – logika aplikacji
-- **Entity Framework Core** – ORM
-- **SQL Server** – baza danych
+# System Roles
 
-Aplikacja wykorzystuje podejście Code First z migracjami.
+The application supports three user roles:
 
-## Modele i relacje
+| Role | Description |
+|---|---|
+| User | Creates and manages own tickets |
+| Support | Solves technical issues and manages assigned tickets |
+| Admin | Full system access and ticket assignment |
 
-W projekcie wykorzystano wiele modeli połączonych relacjami:
+---
 
-- Ticket
-- Category
-- Priority
-- TicketComment
-- Notification
-- IdentityUser
+# Database
 
-Relacje:
-- Ticket → Category (wiele do jednego)
-- Ticket → Priority (wiele do jednego)
-- Ticket → User (właściciel zgłoszenia)
-- Ticket → Assigned Support (opcjonalne przypisanie)
-- Ticket → Comments (jeden do wielu)
-- Ticket → Notifications (logika powiązana)
+The system uses a relational SQL Server database.
 
-## Role w systemie
+Main entities:
+- Tickets
+- Categories
+- Priorities
+- Notifications
+- TicketComments
+- Users
 
-### Admin
-- Zarządzanie kategoriami i priorytetami
-- Zmiana statusów i priorytetów zgłoszeń
-- Przypisywanie zgłoszeń do Support
-- Podgląd wszystkich zgłoszeń
+Entity Framework Core was used as the ORM layer.
 
-### Support
-- Podgląd wszystkich zgłoszeń
-- Przejmowanie nieprzypisanych zgłoszeń
-- Zmiana statusu i priorytetu przypisanych zgłoszeń
-- Komentowanie zgłoszeń
+---
 
-### User
-- Tworzenie zgłoszeń
-- Podgląd własnych zgłoszeń
-- Komentowanie własnych zgłoszeń
+# Running the Application
 
-## Powiadomienia
+## Requirements
 
-System generuje powiadomienia w sytuacjach:
+- Visual Studio 2022
+- .NET 8 SDK
+- SQL Server LocalDB
 
-- Dodanie komentarza
-- Zmiana statusu
-- Zmiana priorytetu
-- Przypisanie zgłoszenia do Support
+---
 
-Powiadomienia trafiają do:
-- Właściciela zgłoszenia
-- Przypisanego pracownika Support
-- Administratora
+## Installation
 
-## Funkcjonalności
+### 1. Clone repository
 
-- Rejestracja i logowanie użytkowników
-- System ról (Admin / Support / User)
-- Tworzenie zgłoszeń
-- Automatyczne ustawianie statusu i priorytetu
-- Komentarze do zgłoszeń
-- Przypisywanie zgłoszeń
-- Filtrowanie zgłoszeń (wszystkie / moje przypisane / nieprzypisane)
-- Powiadomienia
-- Walidacja danych
-- Autoryzacja dostępu do danych
-
-## Baza danych
-
-Projekt wykorzystuje SQL Server LocalDB.
-Connection string znajduje się w pliku: appsettings.json
-
-```json
- "ConnectionStrings": {
-   "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=HelpDesk;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
+```bash
+git clone https://github.com/mrodziak/HelpDesk.git
 ```
 
-## Uruchomienie projektu
+---
 
-1. Otwórz projekt w Visual Studio 2022+
-2. Otwórz:
-   Tools → NuGet Package Manager → Package Manager Console
-3. Wpisz:
-   Update-Database
-4. Uruchom projekt (HTTPS)
+### 2. Open solution in Visual Studio
 
-Baza danych zostanie utworzona automatycznie z migracji.
+Open the `.sln` file.
 
+---
+
+### 3. Update database
+
+Open **Package Manager Console** and run:
+
+```powershell
+Update-Database
+```
+
+---
+
+### 4. Run the application
+
+Press:
+
+```text
+CTRL + F5
+```
+
+or click **Start** in Visual Studio.
+
+---
+
+## Administrator Accounts
+
+- zuzanna.admin@firma.pl
+- oliwier.admin@firma.pl
+
+---
+
+## Support Accounts
+
+- szymon.it@firma.pl
+- karolina.it@firma.pl
+- martyna.it@firma.pl
+- albert.it@firma.pl
+
+---
+
+## User Accounts
+
+- kkowalska@firma.pl
+- npawlowska@firma.pl
+- aborkowska@firma.pl
+- kratajczak@firma.pl
+- hwachowiak@firma.pl
+- lpoch@firma.pl
+- sburak@firma.pl
+- pkazmierczak@firma.pl
+
+---
+
+# Implemented Functionalities
+
+- Authentication and authorization
+- Role-based access control
+- CRUD operations
+- Ticket assignment system
+- Comment system
+- Notification system
+- Status management
+- Priority management
+- Filtering tickets
+- Responsive UI
+- Database persistence
+
+---
+
+# UML Documentation
+
+The project documentation contains:
+- Use Case Diagram
+- Activity Diagrams
+- Class Diagram
+- Sequence Diagrams
+- Deployment / Architecture Diagram
+
+---
+
+Software Engineering – Semester 6  
+Computer Science / Informatics  
+2025/2026
